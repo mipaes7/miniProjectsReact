@@ -16,7 +16,7 @@ function App() {
       window.addEventListener('pointermove', handleMove);
     }
 
-    // esto se ejecuta cuando se monnta el componente y cuando cambian las dependencias
+    // esto se ejecuta cuando se monta el componente y cuando cambian las dependencias
     return () => {
       window.removeEventListener('pointermove', handleMove);
     }
