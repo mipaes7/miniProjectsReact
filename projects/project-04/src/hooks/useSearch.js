@@ -1,15 +1,22 @@
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
+import debounce from 'just-debounce-it'
 
-export const useSearch = () => {
+export const useSearch = ({getMovies}) => {
     const inputRef = useRef()
     const [query, setQuery] = useState('')
     const [error, setError] = useState(null)
+
+    const debouncedGetMovies = useCallback(
+      debounce(search => {
+        getMovies(search)
+      }, [1000]), [getMovies]
+    )
   
     const handleSubmit = (event) => {
       event.preventDefault()
       const inputElement = inputRef.current
       const value = inputElement.value
-      console.log(value)
+      getMovies(value)
     }
   
     //* Múltiples inputs
@@ -35,6 +42,7 @@ export const useSearch = () => {
   
       const newQuery = target.value
       setQuery(newQuery)
+      debouncedGetMovies(newQuery)
   
       if (newQuery === '') {
         setError('No se puede buscar una película vacía')
