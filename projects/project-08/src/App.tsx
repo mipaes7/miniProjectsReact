@@ -1,4 +1,5 @@
 import './App.css'
+import CreateUser from './components/CreateUser'
 import { ListOfUsers } from './components/ListOfUsers'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <>
      <h1>REDUX</h1>
      <ListOfUsers />
+     <CreateUser />
     </>
   )
 }

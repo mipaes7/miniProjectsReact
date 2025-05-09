@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../hooks/store';
-import { deleteUserById, type UserId } from '../store/users/slice';
+import { useAppSelector } from "../hooks/store";
+import { useUserActions } from "../hooks/useUsersActions";
 import {
   Badge,
   Card,
@@ -10,16 +10,11 @@ import {
   TableHeaderCell,
   TableRow,
   Title,
-} from '@tremor/react';
+} from "@tremor/react";
 
 export function ListOfUsers() {
-
-    const users = useAppSelector((state) => state.users)
-    const dispatch = useAppDispatch()
-
-    const handleDeleteUser = (id: UserId) => {
-        dispatch(deleteUserById(id))
-    }
+  const users = useAppSelector((state) => state.users);
+  const { handleDeleteUser } = useUserActions();
 
   return (
     <Card>
@@ -52,7 +47,7 @@ export function ListOfUsers() {
                 {item.name}
               </TableCell>
               <TableCell>{item.email}</TableCell>
-              <TableCell style={{display: 'flex', gap: '5px'}}>
+              <TableCell style={{ display: "flex", gap: "5px" }}>
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +64,7 @@ export function ListOfUsers() {
                     />
                   </svg>
                 </button>
-                <button
-                    onClick={() => handleDeleteUser(item.id)}
-                >
+                <button onClick={() => handleDeleteUser(item.id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
