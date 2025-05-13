@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { Question } from "../types";
+import { persist } from "zustand/middleware";
 
 interface State {
   questions: Question[];
@@ -8,9 +9,12 @@ interface State {
   selectAnswer: (questionId: number, answerIndex: number) => void;
   goNextQuestion: () => void;
   goPrevQuestion: () => void;
+  reset: () => void;
 }
 
-export const useQuestionsStore = create<State>((set, get) => {
+// persist devuelve una función así que necesitamos tiparlo con ()
+
+export const useQuestionsStore = create<State>()(persist((set, get) => {
   return {
     questions: [],
     currentQuestion: 0,
@@ -55,6 +59,11 @@ export const useQuestionsStore = create<State>((set, get) => {
       if (prevQuestion >= 0) {
         set({currentQuestion: prevQuestion})
       }
+    },
+    reset: () => {
+      set({currentQuestion: 0, questions: []})
     }
   };
-});
+}, {
+  name: 'questions',
+}))
