@@ -1,4 +1,4 @@
-const ENDPOINT_CAT_FACT = 'https://catfact.ninja/fact';
+const ENDPOINT_CAT_FACT = import.meta.env.VITE_ENDPOINT_CAT_FACT;
 
 export const getRandomFact = async () => {
     try {
