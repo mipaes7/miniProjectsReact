@@ -44,8 +44,7 @@ ul {
   display: flex;
   flex-direction: column;
   padding-left: 0;
-  align-items: center;
-  gap: 32px;
+  gap: 12px;
 }
 
 li {
@@ -54,6 +53,9 @@ li {
   align-items: center;
   gap: 16px;
   text-align: left;
+  border: 1px solid #555;
+  padding: 6px;
+  border-radius: 4px;
 }
 
 strong {

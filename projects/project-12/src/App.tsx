@@ -1,39 +1,18 @@
-import React, { useState } from "react";
 import "./App.css";
+import Item from "./components/Item";
+import { useItems } from "./hooks/useItems";
 
-type ItemID = `${string}-${string}-${string}-${string}-${string}`;
+export type ItemID = `${string}-${string}-${string}-${string}-${string}`;
 
-interface Item {
+export interface ItemType {
   id: ItemID;
   timestamp: number;
   text: string;
 }
 
-const INITIAL_ITEMS: Item[] = [
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Libros",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Videojuegos",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Sandías",
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: "Discos",
-  },
-];
-
 function App() {
-  const [items, setItems] = useState<Item[]>(INITIAL_ITEMS);
+  
+  const { items, addItem, deleteItem } = useItems()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,26 +22,20 @@ function App() {
     const isInput = input instanceof HTMLInputElement;
     if (!isInput || input == null) return;
 
-    const newItem: Item = {
-      id: crypto.randomUUID(),
-      text: input.value,
-      timestamp: Date.now(),
-    };
-
-    setItems((prevItems) => [...prevItems, newItem]);
+    addItem(input.value)
 
     input.value = "";
   };
 
   const createHandleDelete = (id: ItemID) => () => {
-    setItems((prevItems) => prevItems.filter((i) => i.id !== id));
+    deleteItem(id)
   };
 
   return (
     <main>
       <aside>
         <h1>Prueba técnica</h1>
-        <form onSubmit={handleSubmit}>
+        <form aria-label="add-elements" onSubmit={handleSubmit}>
           <label>
             Elemento a introducir
             <input type="text" name="item" required placeholder="Juegos" />
@@ -75,14 +48,11 @@ function App() {
         {items.length === 0 ? (
           <strong>No hay elementos</strong>
         ) : (
-          items.map((item) => (
-            <ul>
-              <li key={item.id}>
-                {item.text}
-                <button onClick={createHandleDelete(item.id)}>Eliminar</button>
-              </li>
-            </ul>
-          ))
+          <ul>
+            {items.map((item) => (
+              <Item key={item.id} {...item} handleClick={createHandleDelete(item.id)} />
+            ))}
+          </ul>
         )}
       </section>
     </main>
