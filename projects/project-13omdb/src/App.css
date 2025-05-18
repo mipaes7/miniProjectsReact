@@ -17,6 +17,7 @@ form {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 60%;
   gap: 8px;
 }

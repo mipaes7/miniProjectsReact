@@ -23,7 +23,7 @@ const NoResults = () => {
 
 const Movies = ({ movies }) => {
 
-    const hasMovies = movies.length > 0
+    const hasMovies = movies?.length > 0
 
     return (
         hasMovies
