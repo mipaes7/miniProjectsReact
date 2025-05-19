@@ -23,7 +23,7 @@ export const useSearch = ({getMovies}) => {
     /*
     const handleSubmit = () => {
       event.preventDefault()
-      const fields = Object.fromEntries(new window.FormDate(event.target))
+      const fields = Object.fromEntries(new window.FormData(event.target))
       //* fields es un objeto con todos los values de los inputs que tengan atributo name
       const { inputName1Value, inputName2Value .... } = Object.fromEntries(new window.FormDate(event.target))
       }
@@ -32,7 +32,7 @@ export const useSearch = ({getMovies}) => {
      /*
      const handleSubmit = () => {
       event.preventDefault()
-      const fields = new window.FormDate(event.target)
+      const fields = new window.FormData(event.target)
       const query = fields.get('query')
       //* query contiene el valor del input cuyo name es query
     }

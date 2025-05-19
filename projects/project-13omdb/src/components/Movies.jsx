@@ -5,9 +5,11 @@ const ListofMovies = ({ movies }) => {
             {
                 movies.map(movie => (
                     <li key={movie.id}>
-                        <h3>{movie.title}</h3>
-                        <p>{movie.year}</p>
-                        <img src={movie.poster} alt={movie.title} />
+                        <div className="card-content">
+                            <h3>{movie.title}</h3>
+                            <p>{movie.year}</p>
+                            <img src={movie.poster} alt={movie.title} />
+                        </div>
                     </li>
                 ))
             }
@@ -27,8 +29,8 @@ const Movies = ({ movies }) => {
 
     return (
         hasMovies
-        ? <ListofMovies movies={movies} />
-        : <NoResults />
+            ? <ListofMovies movies={movies} />
+            : <NoResults />
     )
 }
 
